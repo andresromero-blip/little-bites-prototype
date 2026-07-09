@@ -55,13 +55,7 @@ export function FocusHero() {
               />
             </div>
             <p className="mt-2 text-sm font-semibold text-white/85">
-              {p.isComplete
-                ? "¡Colección completada!"
-                : `Te faltan ${p.missing} figuras${
-                    p.nextMilestone
-                      ? ` · ${p.nextMilestone.reward.name} al ${p.nextMilestone.threshold}%`
-                      : ""
-                  }`}
+              {p.isComplete ? "¡Colección completada!" : `Te faltan ${p.missing} figuras`}
             </p>
           </div>
 

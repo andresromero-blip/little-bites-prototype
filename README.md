@@ -53,9 +53,12 @@ src/
 /colecciones/[slug]/figuras           Grid (todas · obtenidas · faltantes)
 /colecciones/[slug]/figuras/[id]      Detalle de figura
 /registrar                            Registro de figura (QR simulado)
-/recompensas                          Recompensas
-/perfil                               Perfil de coleccionista
+/buscar                               Búsqueda predictiva (móvil; en desktop vive en el navbar)
+/perfil                               Perfil de coleccionista (progreso global + historial)
 ```
+
+Fuera del MVP (la arquitectura ya lo soporta): `/recompensas` (Expansión),
+compartir/comparar (Expansión), intercambio (Evolución). Tienda: descartada.
 
 ### Estado demo (seed)
 

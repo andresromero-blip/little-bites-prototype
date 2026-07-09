@@ -2,25 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Bell,
-  ChevronDown,
-  Coins,
-  Home,
-  LayoutGrid,
-  Gift,
-  Search,
-  ShoppingBag,
-} from "lucide-react";
+import { Bell, ChevronDown, Home, LayoutGrid, User } from "lucide-react";
+import { PredictiveSearch } from "@/components/search/predictive-search";
 import { profile } from "@/lib/data/profile";
 import { cn } from "@/lib/utils";
 
+/**
+ * Navegación MVP: Inicio · Colecciones · Perfil + búsqueda predictiva global.
+ * Recompensas (Expansión) e Intercambio (Evolución) se añadirán aquí
+ * cuando entren en fase — la estructura ya lo soporta.
+ */
 const NAV_ITEMS = [
   { href: "/", label: "Inicio", icon: Home },
   { href: "/colecciones", label: "Colecciones", icon: LayoutGrid },
-  { href: "/recompensas", label: "Recompensas", icon: Gift },
-  { href: "/descubrir", label: "Descubrir", icon: Search },
-  { href: "/tienda", label: "Tienda", icon: ShoppingBag },
+  { href: "/perfil", label: "Perfil", icon: User },
 ];
 
 function Logo() {
@@ -45,7 +40,7 @@ export function Navbar() {
         <Logo />
 
         {/* Navegación principal — solo desktop */}
-        <nav className="hidden flex-1 items-center justify-center gap-1 lg:flex" aria-label="Principal">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
           {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
             const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
             return (
@@ -67,15 +62,12 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3 lg:ml-0">
-          {/* Monedas — solo desktop */}
-          <div className="hidden items-center gap-1.5 rounded-full bg-coin-soft px-3 py-1.5 lg:flex">
-            <Coins className="size-4 text-coin" aria-hidden />
-            <span className="text-sm font-extrabold">
-              {profile.coins.toLocaleString("en-US")}
-            </span>
-          </div>
+        {/* Búsqueda predictiva — solo desktop (en móvil vive en /buscar) */}
+        <div className="hidden flex-1 justify-end lg:flex">
+          <PredictiveSearch variant="navbar" />
+        </div>
 
+        <div className="ml-auto flex items-center gap-3 lg:ml-0">
           <button
             type="button"
             className="relative rounded-full p-2 hover:bg-background"
@@ -89,12 +81,7 @@ export function Navbar() {
             <span className="flex size-10 items-center justify-center rounded-full bg-linear-to-br from-amber-400 to-orange-600 text-lg">
               🧑‍🚀
             </span>
-            <span className="hidden text-left leading-tight lg:block">
-              <span className="block text-sm font-extrabold">{profile.name}</span>
-              <span className="block text-xs font-semibold text-muted">
-                Nivel {profile.level}
-              </span>
-            </span>
+            <span className="hidden text-sm font-extrabold lg:block">{profile.name}</span>
             <ChevronDown className="hidden size-4 text-muted lg:block" aria-hidden />
           </button>
         </div>

@@ -9,7 +9,7 @@ const ITEMS = [
   { href: "/", label: "Inicio", icon: Home },
   { href: "/colecciones", label: "Colecciones", icon: LayoutGrid },
   { href: "/registrar", label: "Registrar figura", icon: Plus, primary: true },
-  { href: "/descubrir", label: "Descubrir", icon: Search },
+  { href: "/buscar", label: "Buscar", icon: Search },
   { href: "/perfil", label: "Perfil", icon: User },
 ];
 
