@@ -187,7 +187,7 @@ export function ActiveCollections() {
       </div>
 
       {/* Desktop: grid de tarjetas */}
-      <div className="mt-4 hidden grid-cols-2 gap-4 lg:grid xl:grid-cols-4">
+      <div className="mt-6 hidden grid-cols-2 gap-4 lg:grid xl:grid-cols-4">
         {visible.map((c) => (
           <CollectionCard
             key={c.id}
@@ -198,7 +198,7 @@ export function ActiveCollections() {
       </div>
 
       {/* Mobile: lista de filas */}
-      <div className="mt-4 space-y-3 lg:hidden">
+      <div className="mt-5 space-y-3 lg:hidden">
         {visible.map((c) => (
           <CollectionRow
             key={c.id}

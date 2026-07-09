@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Plus } from "lucide-react";
+import { ProgressRing } from "@/components/ui/progress-ring";
 import { getFeaturedCollection } from "@/lib/data";
 import { getCollectionProgress, getGlobalProgress } from "@/lib/progress";
 import { useUserCollection } from "@/lib/store/user-collection";
@@ -81,13 +82,26 @@ export function FocusHero() {
         </div>
       </div>
 
-      {/* Resumen global en una línea (el detalle vive en Perfil) */}
-      <p className="mt-3 px-1 text-[13px] font-semibold text-muted">
-        En total llevas {global.totalObtained} figuras · {global.totalMissing} faltantes ·{" "}
-        <Link href="/perfil" className="font-bold text-primary hover:underline">
+      {/* Progreso total — franja compacta con jerarquía (el detalle vive en Perfil) */}
+      <div className="mt-4 flex items-center gap-4 rounded-card bg-surface p-4 shadow-sm sm:px-5">
+        <ProgressRing percent={global.percent} size={56} strokeWidth={6} />
+        <div className="min-w-0 flex-1 leading-tight">
+          <p className="text-[11px] font-extrabold tracking-widest text-muted uppercase">
+            Progreso total
+          </p>
+          <p className="truncate text-[15px] font-extrabold">
+            {global.totalObtained} figuras obtenidas
+            <span className="font-semibold text-muted"> · {global.totalMissing} faltantes</span>
+          </p>
+        </div>
+        <Link
+          href="/perfil"
+          className="flex shrink-0 items-center gap-1 rounded-xl bg-primary-soft px-4 py-2.5 text-sm font-extrabold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+        >
           Ver mi progreso
+          <ArrowRight className="size-4" aria-hidden />
         </Link>
-      </p>
+      </div>
     </section>
   );
 }

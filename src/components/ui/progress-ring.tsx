@@ -39,8 +39,14 @@ export function ProgressRing({
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-3xl font-extrabold">{percent}%</span>
-        <span className="text-xs font-semibold text-muted">{label}</span>
+        {size < 100 ? (
+          <span className="text-sm font-extrabold">{percent}%</span>
+        ) : (
+          <>
+            <span className="text-3xl font-extrabold">{percent}%</span>
+            <span className="text-xs font-semibold text-muted">{label}</span>
+          </>
+        )}
       </div>
     </div>
   );
