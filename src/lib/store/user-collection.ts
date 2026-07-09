@@ -47,6 +47,6 @@ export const useUserCollection = create<UserCollectionStore>()(
 
       resetDemo: () => set({ owned: demoSeed.owned }),
     }),
-    { name: "lb-user-collection-v1" }
+    { name: "lb-user-collection-v1", skipHydration: true }
   )
 );

@@ -1,20 +1,77 @@
 @import "tailwindcss";
 
 /*
- * Tokens provisionales (Fase 1 — smoke test).
- * El Design System completo se define en Fase 2.
+ * Design tokens — Little Bites (Fase 2)
+ * Fuente: mockups Home desktop/mobile.
  */
 @theme {
+  /* Marca */
   --color-primary: #6d28d9;
+  --color-primary-strong: #5b21b6;
+  --color-primary-deep: #4c1d95;
+  --color-primary-soft: #ede9fe;
   --color-primary-foreground: #ffffff;
+
+  /* Superficies */
+  --color-background: #f4f3f8;
   --color-surface: #ffffff;
-  --color-background: #f7f6fa;
-  --color-foreground: #1d1830;
+  --color-border-soft: #ece9f3;
+
+  /* Texto */
+  --color-foreground: #17123a;
   --color-muted: #6f6a80;
+
+  /* Semánticos de progreso */
+  --color-progress-low: #ef4444;
+  --color-progress-mid: #f59e0b;
+  --color-progress-high: #6d28d9;
   --color-success: #16a34a;
+  --color-success-soft: #dcfce7;
+  --color-warning-soft: #fef3c7;
+  --color-warning-strong: #b45309;
+
+  /* Moneda / recompensa */
+  --color-coin: #f59e0b;
+  --color-coin-soft: #fef3c7;
+
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+/* Rayos radiales del hero (arte CSS mientras no hay assets finales) */
+.hero-rays {
+  background:
+    radial-gradient(ellipse at 65% 40%, rgba(139, 92, 246, 0.45) 0%, transparent 55%),
+    repeating-conic-gradient(
+      from 0deg at 65% 45%,
+      rgba(255, 255, 255, 0.05) 0deg 6deg,
+      transparent 6deg 16deg
+    ),
+    linear-gradient(115deg, #3b0d81 0%, #4c1d95 45%, #5b21b6 100%);
+}
+
+/* Cielo estrellado para arte de tarjetas */
+.card-stars {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.5) 1px, transparent 2px),
+    radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.4) 1px, transparent 2px),
+    radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.35) 1px, transparent 2px),
+    radial-gradient(circle at 85% 60%, rgba(255, 255, 255, 0.45) 1px, transparent 2px),
+    radial-gradient(circle at 55% 45%, rgba(255, 255, 255, 0.25) 1px, transparent 2px);
+}
+
+/* Oculta scrollbar en carruseles horizontales móviles */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

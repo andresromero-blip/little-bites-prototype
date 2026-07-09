@@ -30,9 +30,12 @@ través del repositorio (`src/lib/data/index.ts`). Migrar a API = cambiar un arc
 ```
 src/
   app/                    # Rutas (App Router)
-    page.tsx              # Home (Fase 1: página de verificación)
+    page.tsx              # Home (hero, progreso, activas, próximamente, recompensas, históricas)
     globals.css           # Tokens de diseño (Tailwind v4 @theme)
-  components/             # (Fase 3+) ui/ · layout/ · collections/ · figures/ · rewards/ · progress/
+  components/
+    ui/                   # Primitivas (progress-bar, progress-ring, section-header, collection-art)
+    layout/               # navbar (desktop) · bottom-nav (móvil) · store-hydrator
+    home/                 # Secciones del Home
   lib/
     types.ts              # Modelo de dominio
     data/                 # Contenido + repositorio
