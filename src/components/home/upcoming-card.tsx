@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Bell, CalendarClock } from "lucide-react";
-import { SectionHeader } from "@/components/ui/section-header";
+import { Bell } from "lucide-react";
 import { getCollections } from "@/lib/data";
 
 function useCountdown(targetIso: string) {
@@ -22,13 +21,15 @@ function useCountdown(targetIso: string) {
     days: Math.floor(s / 86400),
     hours: Math.floor((s % 86400) / 3600),
     minutes: Math.floor((s % 3600) / 60),
-    seconds: s % 60,
   };
 }
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-/** Panel "Próximamente" con countdown en vivo. */
+/**
+ * Teaser compacto "Próximamente": una sola línea con countdown.
+ * Genera anticipación sin robar foco al bloque principal.
+ */
 export function UpcomingCard() {
   const next = getCollections("proximamente")[0];
   const countdown = useCountdown(next ? `${next.launchDate}T00:00:00-06:00` : "");
@@ -36,60 +37,34 @@ export function UpcomingCard() {
   if (!next) return null;
 
   return (
-    <section aria-label="Próximamente">
-      <SectionHeader title="Próximamente" actionLabel="Ver todas" actionHref="/colecciones" />
-
-      <div className="mt-4 rounded-card bg-surface p-4 shadow-sm">
-        <div className="flex items-center gap-4">
-          {/* Silueta misteriosa */}
-          <div className="flex size-24 shrink-0 items-center justify-center rounded-xl bg-primary-soft">
-            <span className="text-4xl font-black text-primary/40">?</span>
-          </div>
-
-          <div className="min-w-0 flex-1">
-            <p className="text-[10px] font-extrabold tracking-widest text-primary uppercase">
-              Nueva colección
-            </p>
-            <h3 className="text-lg font-extrabold">Muy pronto</h3>
-            <p className="text-[13px] font-semibold text-muted">
-              Prepárate para descubrir nuevas figuras increíbles.
-            </p>
-
-            <div className="mt-2 flex items-center gap-2">
-              <button
-                type="button"
-                className="rounded-lg bg-primary px-3.5 py-2 text-[13px] font-extrabold text-primary-foreground transition-colors hover:bg-primary-strong"
-              >
-                Quiero saber más
-              </button>
-              <button
-                type="button"
-                aria-label="Avisarme del lanzamiento"
-                className="rounded-lg border border-border-soft p-2 text-muted hover:bg-background"
-              >
-                <Bell className="size-4" aria-hidden />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-4 flex items-center justify-between rounded-xl bg-background px-4 py-3">
-          <span className="flex items-center gap-2 text-[13px] font-bold text-muted">
-            <CalendarClock className="size-4" aria-hidden />
-            Lanzamiento en:
-          </span>
-          <span className="font-extrabold tabular-nums" suppressHydrationWarning>
-            {countdown ? (
-              <>
-                {countdown.days} d&nbsp;&nbsp;{pad(countdown.hours)} h&nbsp;&nbsp;
-                {pad(countdown.minutes)} m&nbsp;&nbsp;{pad(countdown.seconds)} s
-              </>
-            ) : (
-              "— d — h — m — s"
-            )}
-          </span>
-        </div>
+    <section
+      aria-label="Próximamente"
+      className="flex items-center gap-4 rounded-card bg-primary-deep p-4 text-white sm:px-6"
+    >
+      <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white/10">
+        <span className="text-xl font-black text-white/60">?</span>
       </div>
+
+      <div className="min-w-0 flex-1 leading-tight">
+        <p className="text-[10px] font-extrabold tracking-widest text-white/60 uppercase">
+          Próximamente
+        </p>
+        <p className="truncate text-[15px] font-extrabold">{next.name}</p>
+      </div>
+
+      <p className="shrink-0 text-sm font-extrabold tabular-nums" suppressHydrationWarning>
+        {countdown
+          ? `${countdown.days} d ${pad(countdown.hours)} h ${pad(countdown.minutes)} m`
+          : "— d — h — m"}
+      </p>
+
+      <button
+        type="button"
+        aria-label="Avisarme del lanzamiento"
+        className="shrink-0 rounded-lg bg-white/10 p-2 transition-colors hover:bg-white/20"
+      >
+        <Bell className="size-4" aria-hidden />
+      </button>
     </section>
   );
 }
