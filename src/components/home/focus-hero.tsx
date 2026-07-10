@@ -31,9 +31,12 @@ export function FocusHero() {
             <img
               src={collection.heroBackground}
               alt=""
-              className="h-full w-full object-cover opacity-20"
+              className="h-full w-full object-cover opacity-15"
             />
-            <div className="absolute inset-0 bg-linear-to-r from-[#3b0d81] from-15% via-[#3b0d81]/70 to-[#4c1d95]/35" />
+            {/* Máscara mobile: clara arriba (personajes), oscura abajo (texto) */}
+            <div className="absolute inset-0 bg-linear-to-b from-[#4c1d95]/35 via-[#3b0d81]/70 to-[#3b0d81] md:hidden" />
+            {/* Máscara desktop: oscura a la izquierda (texto), clara a la derecha (personajes) */}
+            <div className="absolute inset-0 hidden bg-linear-to-r from-[#3b0d81] from-15% via-[#3b0d81]/70 to-[#4c1d95]/35 md:block" />
           </div>
         )}
 
