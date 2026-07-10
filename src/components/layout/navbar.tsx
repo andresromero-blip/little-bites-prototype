@@ -22,10 +22,10 @@ const NAV_ITEMS = [
 function Logo() {
   return (
     <Link href="/" className="shrink-0 leading-none" aria-label="Little Bites — Inicio">
-      <span className="block -rotate-3 text-2xl font-black italic tracking-tight text-primary-deep">
+      <span className="block -rotate-3 text-2xl font-black italic tracking-tight text-logo">
         Little
       </span>
-      <span className="-mt-1.5 block -rotate-3 text-2xl font-black italic tracking-tight text-primary-deep">
+      <span className="-mt-1.5 block -rotate-3 text-2xl font-black italic tracking-tight text-logo">
         Bites<span className="align-super text-[10px]">®</span>
       </span>
     </Link>

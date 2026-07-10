@@ -38,6 +38,9 @@
   --color-track: #e9e6f2;
   --color-line: #d9d4e6;
 
+  /* Marca */
+  --color-logo: #4c1d95;
+
   --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 1.25rem;
@@ -71,6 +74,8 @@
 
   --color-track: #2c2544;
   --color-line: #3a3157;
+
+  --color-logo: #ffffff;
 }
 
 body {

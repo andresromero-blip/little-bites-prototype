@@ -18,10 +18,10 @@ export function Footer() {
       <div className="mx-auto grid max-w-5xl gap-10 px-4 py-10 sm:grid-cols-3 lg:px-8">
         <div>
           <p className="leading-none">
-            <span className="block -rotate-3 text-xl font-black italic tracking-tight text-primary-deep">
+            <span className="block -rotate-3 text-xl font-black italic tracking-tight text-logo">
               Little
             </span>
-            <span className="-mt-1 block -rotate-3 text-xl font-black italic tracking-tight text-primary-deep">
+            <span className="-mt-1 block -rotate-3 text-xl font-black italic tracking-tight text-logo">
               Bites<span className="align-super text-[9px]">®</span>
             </span>
           </p>
