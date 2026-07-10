@@ -43,26 +43,26 @@ export function FocusHero() {
         {/* Capa 2 — Personajes: PNG sin fondo que convive con el texto */}
         {collection.heroImage ? (
           <>
-            {/* Desktop: anclado abajo-derecha */}
+            {/* Desktop: anclado abajo-derecha, completo y con área de respeto */}
             <div
-              className="pointer-events-none absolute inset-y-0 right-0 hidden w-[38%] items-end justify-center pt-6 pr-4 md:flex"
+              className="pointer-events-none absolute inset-y-0 right-0 hidden w-[40%] items-end justify-end pt-8 pr-10 pb-6 md:flex lg:pr-14"
               aria-hidden
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={collection.heroImage}
                 alt=""
-                className="max-h-full w-auto object-contain object-bottom drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)]"
+                className="max-h-[88%] max-w-full object-contain object-bottom drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)]"
               />
             </div>
 
-            {/* Mobile: protagonista arriba, sobre el mismo fondo */}
-            <div className="relative flex h-44 w-full items-end justify-center pt-5 md:hidden" aria-hidden>
+            {/* Mobile: protagonista arriba, completo, sobre el mismo fondo */}
+            <div className="relative flex h-44 w-full items-end justify-center px-8 pt-5 md:hidden" aria-hidden>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={collection.heroImage}
                 alt=""
-                className="h-full w-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.35)]"
+                className="max-h-full max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.35)]"
               />
             </div>
           </>
