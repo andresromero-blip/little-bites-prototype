@@ -56,6 +56,8 @@ export interface Collection {
   series: string[];
   milestones: Milestone[];
   image: string | null;
+  /** Arte promocional para el hero del Home (safe area derecha) */
+  heroImage?: string | null;
 }
 
 /** Estado persistido del usuario: la ÚNICA fuente de verdad del avance. */

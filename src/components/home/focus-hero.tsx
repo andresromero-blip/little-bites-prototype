@@ -23,15 +23,28 @@ export function FocusHero() {
   return (
     <section aria-label="Tu colección ahora">
       <div className="hero-rays relative overflow-hidden rounded-card text-white">
-        {/* Logo CN */}
-        <div className="absolute top-5 right-5 hidden grid-cols-2 overflow-hidden rounded-md text-[13px] leading-none font-black sm:grid">
-          <span className="bg-black px-1.5 py-1 text-white">C</span>
-          <span className="bg-white px-1.5 py-1 text-black">N</span>
-          <span className="bg-white px-1.5 py-1 text-black">✓</span>
-          <span className="bg-black px-1.5 py-1 text-white">✓</span>
-        </div>
+        {/* Arte promocional — zona derecha, fuera del área segura del texto */}
+        {collection.heroImage ? (
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] items-center justify-end p-5 md:flex lg:p-6">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={collection.heroImage}
+              alt=""
+              aria-hidden
+              className="max-h-full max-w-full rounded-2xl object-contain shadow-2xl ring-1 ring-white/25"
+            />
+          </div>
+        ) : (
+          /* Fallback: chip CN mientras no hay arte */
+          <div className="absolute top-5 right-5 hidden grid-cols-2 overflow-hidden rounded-md text-[13px] leading-none font-black sm:grid">
+            <span className="bg-black px-1.5 py-1 text-white">C</span>
+            <span className="bg-white px-1.5 py-1 text-black">N</span>
+            <span className="bg-white px-1.5 py-1 text-black">✓</span>
+            <span className="bg-black px-1.5 py-1 text-white">✓</span>
+          </div>
+        )}
 
-        <div className="relative p-6 sm:p-10">
+        <div className="relative p-6 sm:p-10 md:max-w-[58%]">
           <span className="w-fit rounded-full bg-white/15 px-3.5 py-1.5 text-[11px] font-extrabold tracking-widest uppercase backdrop-blur-sm">
             Colección destacada
           </span>
