@@ -8,7 +8,7 @@ import { getCollectionProgress, getGlobalProgress } from "@/lib/progress";
 import { useUserCollection } from "@/lib/store/user-collection";
 
 /** Panel "Mi Progreso": anillo global + stats clave. */
-export function ProgressPanel() {
+export function ProgressPanel({ showDetailLink = true }: { showDetailLink?: boolean }) {
   const owned = useUserCollection((s) => s.owned);
   const global = getGlobalProgress(owned);
 
@@ -42,12 +42,14 @@ export function ProgressPanel() {
     <section className="rounded-card bg-surface p-6 shadow-sm" aria-label="Mi progreso">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-extrabold tracking-wide uppercase">Mi progreso</h2>
-        <Link
-          href="/perfil"
-          className="flex items-center gap-1 text-sm font-bold text-primary hover:underline"
-        >
-          Ver detalle <ArrowRight className="size-4" aria-hidden />
-        </Link>
+        {showDetailLink && (
+          <Link
+            href="/perfil"
+            className="flex items-center gap-1 text-sm font-bold text-primary hover:underline"
+          >
+            Ver detalle <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        )}
       </div>
 
       {/* Desktop: anillo + lista · Mobile: anillo + fila de stats */}

@@ -11,6 +11,7 @@ import type { RewardType } from "@/lib/types";
  */
 export const profile = {
   name: "Andrés",
+  email: "andres@correo.com",
 };
 
 export interface RecentReward {
