@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import { StoreHydrator } from "@/components/layout/store-hydrator";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
+import { BottomNav } from "@/components/layout/bottom-nav";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -29,9 +32,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es-MX" className={nunito.variable}>
-      <body className="min-h-dvh antialiased">
+      <body className="flex min-h-dvh flex-col antialiased">
         <StoreHydrator />
-        {children}
+        <Navbar />
+        <div className="flex-1">{children}</div>
+        <Footer />
+        <BottomNav />
       </body>
     </html>
   );

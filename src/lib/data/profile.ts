@@ -5,12 +5,9 @@ import type { RewardType } from "@/lib/types";
  * En producción vendrá de la cuenta del usuario.
  */
 
+/** Nivel, XP y monedas pertenecen a la fase Expansión — fuera del MVP. */
 export const profile = {
   name: "Explorador",
-  level: 4,
-  coins: 1250,
-  xp: 1250,
-  xpNext: 2000,
 };
 
 export interface RecentReward {
