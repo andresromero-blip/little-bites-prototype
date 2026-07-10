@@ -38,11 +38,11 @@ export default async function CollectionDetailPage({ params, searchParams }: Pro
   return (
     <main className="mx-auto max-w-5xl px-4 py-6 pb-24 lg:px-8 lg:py-8 lg:pb-12">
       <Link
-        href="/colecciones"
+        href="/"
         className="flex w-fit items-center gap-1.5 text-sm font-bold text-muted hover:text-primary"
       >
         <ArrowLeft className="size-4" aria-hidden />
-        Colecciones
+        Inicio
       </Link>
 
       <div className="mt-5 grid gap-8 lg:grid-cols-5 lg:gap-10">

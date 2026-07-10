@@ -2,12 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, LayoutGrid, Plus, Search, User } from "lucide-react";
+import { Home, Plus, Search, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const ITEMS = [
   { href: "/", label: "Inicio", icon: Home },
-  { href: "/colecciones", label: "Colecciones", icon: LayoutGrid },
   { href: "/registrar", label: "Registrar figura", icon: Plus, primary: true },
   { href: "/buscar", label: "Buscar", icon: Search },
   { href: "/perfil", label: "Perfil", icon: User },

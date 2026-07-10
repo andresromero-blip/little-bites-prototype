@@ -12,6 +12,8 @@ export default function Home() {
     <main className="mx-auto max-w-5xl space-y-8 px-4 py-6 pb-24 lg:px-8 lg:py-8 lg:pb-12">
       <FocusHero />
       <ActiveCollections />
+      {/* /colecciones se elimina de la nav en MVP: el Home es el navegador
+          de colecciones. El índice dedicado se reactiva en Expansión. */}
     </main>
   );
 }

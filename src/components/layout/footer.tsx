@@ -2,7 +2,6 @@ import Link from "next/link";
 
 const EXPLORE = [
   { href: "/", label: "Inicio" },
-  { href: "/colecciones", label: "Colecciones" },
   { href: "/buscar", label: "Buscar" },
   { href: "/perfil", label: "Mi perfil" },
 ];

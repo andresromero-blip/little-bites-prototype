@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell, ChevronDown, Home, LayoutGrid, User } from "lucide-react";
+import { Bell, ChevronDown, Home, User } from "lucide-react";
 import { PredictiveSearch } from "@/components/search/predictive-search";
 import { profile } from "@/lib/data/profile";
 import { cn } from "@/lib/utils";
@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils";
  */
 const NAV_ITEMS = [
   { href: "/", label: "Inicio", icon: Home },
-  { href: "/colecciones", label: "Colecciones", icon: LayoutGrid },
   { href: "/perfil", label: "Perfil", icon: User },
 ];
 

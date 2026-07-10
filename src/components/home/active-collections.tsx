@@ -137,12 +137,7 @@ export function ActiveCollections() {
 
   return (
     <section aria-label="Colecciones">
-      <SectionHeader
-        icon={Sparkles}
-        title="Colecciones"
-        actionLabel="Ver todas"
-        actionHref="/colecciones"
-      />
+      <SectionHeader icon={Sparkles} title="Colecciones" />
 
       <div className="mt-4">
         <Tabs
