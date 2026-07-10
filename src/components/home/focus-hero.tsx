@@ -23,17 +23,33 @@ export function FocusHero() {
   return (
     <section aria-label="Tu colección ahora">
       <div className="hero-rays relative overflow-hidden rounded-card text-white">
-        {/* Arte promocional — zona derecha, fuera del área segura del texto */}
         {collection.heroImage ? (
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] items-center justify-end p-5 md:flex lg:p-6">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={collection.heroImage}
-              alt=""
+          <>
+            {/* Mobile: franja superior integrada, con fundido hacia el contenido */}
+            <div className="relative h-44 w-full md:hidden" aria-hidden>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={collection.heroImage}
+                alt=""
+                className="h-full w-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-linear-to-b from-transparent from-40% to-[#3b0d81]" />
+            </div>
+
+            {/* Desktop: sangrado a la derecha, fundido lateral al morado */}
+            <div
+              className="pointer-events-none absolute inset-y-0 right-0 hidden w-[45%] md:block"
               aria-hidden
-              className="max-h-full max-w-full rounded-2xl object-contain shadow-2xl ring-1 ring-white/25"
-            />
-          </div>
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={collection.heroImage}
+                alt=""
+                className="h-full w-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-linear-to-r from-[#4c1d95] via-transparent via-45% to-transparent" />
+            </div>
+          </>
         ) : (
           /* Fallback: chip CN mientras no hay arte */
           <div className="absolute top-5 right-5 hidden grid-cols-2 overflow-hidden rounded-md text-[13px] leading-none font-black sm:grid">
