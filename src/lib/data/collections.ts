@@ -39,7 +39,7 @@ export const collections: Collection[] = [
     milestones: milestonesFor("Cartoon Network"),
     image: null,
     heroImage: "/images/hero-cn-chars.png",
-    heroBackground: "/images/hero-cn-bg.jpg",
+    heroBackground: "/images/hero-cn-bg.png",
   },
   {
     id: "monstruos-del-multiverso",
