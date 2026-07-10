@@ -10,7 +10,7 @@ export function DemoReset() {
   return (
     <section
       aria-label="Herramientas de prototipo"
-      className="rounded-card border border-dashed border-[#d9d4e6] p-4"
+      className="rounded-card border border-dashed border-line p-4"
     >
       <p className="text-[11px] font-extrabold tracking-widest text-muted uppercase">
         Prototipo

@@ -37,7 +37,7 @@ function FigureCard({
           "flex size-16 items-center justify-center rounded-full text-base font-black",
           owned
             ? "bg-primary-soft text-primary ring-2 ring-primary/30"
-            : "border-2 border-dashed border-[#d9d4e6] bg-background text-muted"
+            : "border-2 border-dashed border-line bg-background text-muted"
         )}
       >
         {String(figure.number).padStart(2, "0")}

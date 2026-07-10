@@ -34,9 +34,43 @@
   --color-coin: #f59e0b;
   --color-coin-soft: #fef3c7;
 
+  /* Pistas y líneas */
+  --color-track: #e9e6f2;
+  --color-line: #d9d4e6;
+
   --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 1.25rem;
+}
+
+/*
+ * Dark mode: mismos tokens, valores nuevos. Ningún componente cambia.
+ * El violeta primario se aclara (#a78bfa) para mantener contraste AA
+ * sobre superficies oscuras; su foreground pasa a tinta oscura.
+ */
+.dark {
+  color-scheme: dark;
+
+  --color-primary: #a78bfa;
+  --color-primary-strong: #8b5cf6;
+  --color-primary-soft: #2b2150;
+  --color-primary-foreground: #17102b;
+
+  --color-background: #14101f;
+  --color-surface: #1e1832;
+  --color-border-soft: #2c2544;
+
+  --color-foreground: #f1eefb;
+  --color-muted: #a29bbf;
+
+  --color-progress-high: #a78bfa;
+  --color-success: #4ade80;
+  --color-success-soft: #12301f;
+  --color-warning-soft: #33270e;
+  --color-warning-strong: #fbbf24;
+
+  --color-track: #2c2544;
+  --color-line: #3a3157;
 }
 
 body {

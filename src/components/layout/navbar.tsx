@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Home, User } from "lucide-react";
 import { NotificationBell } from "@/components/notifications/notification-bell";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { PredictiveSearch } from "@/components/search/predictive-search";
 import { profile } from "@/lib/data/profile";
 import { cn } from "@/lib/utils";
@@ -68,6 +69,7 @@ export function Navbar() {
         </div>
 
         <div className="ml-auto flex items-center gap-3 lg:ml-0">
+          <ThemeToggle />
           <NotificationBell />
 
           <button type="button" className="flex items-center gap-2.5" aria-label="Perfil">

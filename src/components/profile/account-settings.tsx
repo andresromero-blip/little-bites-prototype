@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, ChevronRight, Globe, SunMedium } from "lucide-react";
+import { Bell, ChevronRight, Globe, Moon, SunMedium } from "lucide-react";
+import { useTheme } from "@/lib/hooks/use-theme";
 import { cn } from "@/lib/utils";
 
 function Row({
@@ -30,6 +31,8 @@ function Row({
 /** Cuenta y preferencias (mock de prototipo, sin backend). */
 export function AccountSettings() {
   const [notifications, setNotifications] = useState(true);
+  const { theme, toggle } = useTheme();
+  const dark = theme === "dark";
 
   return (
     <div className="space-y-6">
@@ -60,7 +63,7 @@ export function AccountSettings() {
               onClick={() => setNotifications((v) => !v)}
               className={cn(
                 "relative h-7 w-12 rounded-full transition-colors",
-                notifications ? "bg-primary" : "bg-[#d9d4e6]"
+                notifications ? "bg-primary" : "bg-line"
               )}
             >
               <span
@@ -72,10 +75,35 @@ export function AccountSettings() {
             </button>
           </Row>
           <Row
-            icon={<SunMedium className="size-4 text-primary" aria-hidden />}
+            icon={
+              dark ? (
+                <Moon className="size-4 text-primary" aria-hidden />
+              ) : (
+                <SunMedium className="size-4 text-primary" aria-hidden />
+              )
+            }
             label="Tema"
-            value="Claro"
-          />
+            value={dark ? "Oscuro" : "Claro"}
+          >
+            <button
+              type="button"
+              role="switch"
+              aria-checked={dark}
+              aria-label="Tema oscuro"
+              onClick={toggle}
+              className={cn(
+                "relative h-7 w-12 rounded-full transition-colors",
+                dark ? "bg-primary" : "bg-line"
+              )}
+            >
+              <span
+                className={cn(
+                  "absolute top-1 size-5 rounded-full bg-white shadow transition-all",
+                  dark ? "left-6" : "left-1"
+                )}
+              />
+            </button>
+          </Row>
           <Row
             icon={<Globe className="size-4 text-primary" aria-hidden />}
             label="Idioma"
