@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell, ChevronDown, Home, User } from "lucide-react";
+import { ChevronDown, Home, User } from "lucide-react";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 import { PredictiveSearch } from "@/components/search/predictive-search";
 import { profile } from "@/lib/data/profile";
 import { cn } from "@/lib/utils";
@@ -67,14 +68,7 @@ export function Navbar() {
         </div>
 
         <div className="ml-auto flex items-center gap-3 lg:ml-0">
-          <button
-            type="button"
-            className="relative rounded-full p-2 hover:bg-background"
-            aria-label="Notificaciones"
-          >
-            <Bell className="size-5" aria-hidden />
-            <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-red-500 ring-2 ring-surface" />
-          </button>
+          <NotificationBell />
 
           <button type="button" className="flex items-center gap-2.5" aria-label="Perfil">
             <span className="flex size-10 items-center justify-center rounded-full bg-linear-to-br from-amber-400 to-orange-600 text-lg">
