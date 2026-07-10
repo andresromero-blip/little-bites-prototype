@@ -23,31 +23,44 @@ export function FocusHero() {
   return (
     <section aria-label="Tu colección ahora">
       <div className="hero-rays relative overflow-hidden rounded-card text-white">
+        {/* Capa 1 — Fondo: foto de la colección con opacidad + máscara de color.
+            El lado del texto queda siempre sobre morado casi sólido (contraste AA/AAA). */}
+        {collection.heroBackground && (
+          <div className="absolute inset-0" aria-hidden>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={collection.heroBackground}
+              alt=""
+              className="h-full w-full object-cover opacity-20"
+            />
+            <div className="absolute inset-0 bg-linear-to-r from-[#3b0d81] from-15% via-[#3b0d81]/70 to-[#4c1d95]/35" />
+          </div>
+        )}
+
+        {/* Capa 2 — Personajes: PNG sin fondo que convive con el texto */}
         {collection.heroImage ? (
           <>
-            {/* Mobile: franja superior integrada, con fundido hacia el contenido */}
-            <div className="relative h-44 w-full md:hidden" aria-hidden>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={collection.heroImage}
-                alt=""
-                className="h-full w-full object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-linear-to-b from-transparent from-40% to-[#3b0d81]" />
-            </div>
-
-            {/* Desktop: sangrado a la derecha, fundido lateral al morado */}
+            {/* Desktop: anclado abajo-derecha */}
             <div
-              className="pointer-events-none absolute inset-y-0 right-0 hidden w-[45%] md:block"
+              className="pointer-events-none absolute inset-y-0 right-0 hidden w-[38%] items-end justify-center pt-6 pr-4 md:flex"
               aria-hidden
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={collection.heroImage}
                 alt=""
-                className="h-full w-full object-cover object-center"
+                className="max-h-full w-auto object-contain object-bottom drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)]"
               />
-              <div className="absolute inset-0 bg-linear-to-r from-[#4c1d95] via-transparent via-45% to-transparent" />
+            </div>
+
+            {/* Mobile: protagonista arriba, sobre el mismo fondo */}
+            <div className="relative flex h-44 w-full items-end justify-center pt-5 md:hidden" aria-hidden>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={collection.heroImage}
+                alt=""
+                className="h-full w-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.35)]"
+              />
             </div>
           </>
         ) : (
