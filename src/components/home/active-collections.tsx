@@ -7,46 +7,13 @@ import { CollectionArt } from "@/components/ui/collection-art";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { SectionHeader } from "@/components/ui/section-header";
 import { Tabs } from "@/components/ui/tabs";
+import { StatusBadge } from "@/components/collections/status-badge";
+import { launchLabel } from "@/lib/format";
 import { getCollections } from "@/lib/data";
 import { getCollectionProgress } from "@/lib/progress";
 import { useUserCollection } from "@/lib/store/user-collection";
 import type { Collection, CollectionProgress, CollectionStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
-
-const MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
-
-function launchLabel(iso: string): string {
-  const [y, m, d] = iso.split("-").map(Number);
-  return `${d} ${MONTHS[(m ?? 1) - 1]} ${y}`;
-}
-
-function StatusBadge({
-  collection,
-  progress,
-}: {
-  collection: Collection;
-  progress: CollectionProgress;
-}) {
-  const badge =
-    collection.status === "proximamente"
-      ? { label: "Próximamente", cls: "bg-primary-soft text-primary" }
-      : progress.isComplete
-        ? { label: "Completada", cls: "bg-success-soft text-success" }
-        : collection.isNew
-          ? { label: "Nueva", cls: "bg-primary-soft text-primary" }
-          : { label: "Al aire", cls: "bg-warning-soft text-warning-strong" };
-
-  return (
-    <span
-      className={cn(
-        "rounded-full px-2.5 py-1 text-[10px] font-extrabold tracking-wider uppercase",
-        badge.cls
-      )}
-    >
-      {badge.label}
-    </span>
-  );
-}
 
 /** Meta inferior de la tarjeta/fila: progreso o fecha de lanzamiento. */
 function CollectionMeta({

@@ -116,7 +116,7 @@ export function FocusHero() {
             </Link>
             {!p.isComplete && (
               <Link
-                href={`/colecciones/${collection.slug}/figuras?filtro=faltantes`}
+                href={`/colecciones/${collection.slug}?filtro=faltantes`}
                 className="flex items-center gap-1 text-sm font-bold text-white/85 underline-offset-4 hover:underline"
               >
                 Ver faltantes ({p.missing})

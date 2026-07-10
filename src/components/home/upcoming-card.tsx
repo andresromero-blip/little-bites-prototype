@@ -1,34 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Bell } from "lucide-react";
+import { useCountdown, pad2 } from "@/lib/hooks/use-countdown";
 import { getCollections } from "@/lib/data";
-
-function useCountdown(targetIso: string) {
-  const [now, setNow] = useState<number | null>(null);
-
-  useEffect(() => {
-    setNow(Date.now());
-    const t = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(t);
-  }, []);
-
-  if (now === null) return null; // pre-hidratación
-
-  const diff = Math.max(0, new Date(targetIso).getTime() - now);
-  const s = Math.floor(diff / 1000);
-  return {
-    days: Math.floor(s / 86400),
-    hours: Math.floor((s % 86400) / 3600),
-    minutes: Math.floor((s % 3600) / 60),
-  };
-}
-
-const pad = (n: number) => String(n).padStart(2, "0");
 
 /**
  * Teaser compacto "Próximamente": una sola línea con countdown.
- * Genera anticipación sin robar foco al bloque principal.
+ * (Actualmente fuera del Home; disponible para /colecciones.)
  */
 export function UpcomingCard() {
   const next = getCollections("proximamente")[0];
@@ -54,7 +32,7 @@ export function UpcomingCard() {
 
       <p className="shrink-0 text-sm font-extrabold tabular-nums" suppressHydrationWarning>
         {countdown
-          ? `${countdown.days} d ${pad(countdown.hours)} h ${pad(countdown.minutes)} m`
+          ? `${countdown.days} d ${pad2(countdown.hours)} h ${pad2(countdown.minutes)} m`
           : "— d — h — m"}
       </p>
 
