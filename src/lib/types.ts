@@ -65,8 +65,16 @@ export interface Collection {
   image: string | null;
   /** PNG sin fondo (personajes) que convive con el texto del hero */
   heroImage?: string | null;
+  /**
+   * Art direction responsiva (opcional): variante vertical del arte para
+   * mobile. Si no existe, se reutiliza heroImage (object-contain: nunca
+   * se recorta ni deforma, solo cambia de escala y ancla).
+   */
+  heroImageMobile?: string | null;
   /** Foto/arte de fondo del hero; se aplica con opacidad + máscara de color */
   heroBackground?: string | null;
+  /** Variante vertical del fondo para mobile (opcional). */
+  heroBackgroundMobile?: string | null;
 }
 
 /** Estado persistido del usuario: la ÚNICA fuente de verdad del avance. */

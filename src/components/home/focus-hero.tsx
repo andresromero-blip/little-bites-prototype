@@ -27,12 +27,19 @@ export function FocusHero() {
             El lado del texto queda siempre sobre morado casi sólido (contraste AA/AAA). */}
         {collection.heroBackground && (
           <div className="absolute inset-0" aria-hidden>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={collection.heroBackground}
-              alt=""
-              className="h-full w-full object-cover opacity-15"
-            />
+            {/* Art direction: variante vertical en mobile si existe;
+                el <picture> elige el asset ANTES de descargarlo (sin doble carga) */}
+            <picture>
+              {collection.heroBackgroundMobile && (
+                <source media="(max-width: 767px)" srcSet={collection.heroBackgroundMobile} />
+              )}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={collection.heroBackground}
+                alt=""
+                className="h-full w-full object-cover opacity-15"
+              />
+            </picture>
             {/* Máscara mobile: clara arriba (personajes), oscura abajo (texto) */}
             <div className="absolute inset-0 bg-linear-to-b from-[#4c1d95]/35 via-[#3b0d81]/70 to-[#3b0d81] md:hidden" />
             {/* Máscara desktop: oscura a la izquierda (texto), clara a la derecha (personajes) */}
@@ -56,11 +63,13 @@ export function FocusHero() {
               />
             </div>
 
-            {/* Mobile: protagonista arriba, completo, sobre el mismo fondo */}
+            {/* Mobile: protagonista arriba, completo, sobre el mismo fondo.
+                Usa la variante vertical si existe; si no, el mismo asset
+                (object-contain garantiza que nunca se recorte). */}
             <div className="relative flex h-44 w-full items-end justify-center px-8 pt-5 md:hidden" aria-hidden>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={collection.heroImage}
+                src={collection.heroImageMobile ?? collection.heroImage}
                 alt=""
                 className="max-h-full max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.35)]"
               />
