@@ -14,18 +14,11 @@ import {
 import { RarityChip } from "@/components/figures/rarity-chip";
 import { FigureSilhouette } from "@/components/figures/silhouette";
 import { useUserCollection } from "@/lib/store/user-collection";
-import type { Collection, Figure, Rarity } from "@/lib/types";
+import type { Collection, Figure } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const THEMES: Record<string, string> = {
   "cartoon-network": "from-[#3b0d81] via-[#4c1d95] to-[#6d28d9]",
-};
-
-const RARITY_INFO: Record<Rarity, string> = {
-  comun: "Aparece con frecuencia en los empaques.",
-  rara: "Aparece pocas veces: tiene suerte quien la encuentra.",
-  epica: "Muy difícil de encontrar. Pieza de coleccionista.",
-  especial: "Edición única de la colección. La más buscada.",
 };
 
 /** Ficha de figura: arte, datos, marcado y datos curiosos (al obtenerla). */
@@ -81,9 +74,8 @@ export function FigureSheet({
           </Link>
         </p>
 
-        <p className="mt-4 text-[15px] font-semibold text-muted">{figure.description}</p>
-        <p className="mt-2 text-[13px] font-semibold text-muted/80">
-          Rareza: {RARITY_INFO[figure.rarity]}
+        <p className="mt-4 text-[15px] leading-relaxed font-semibold text-muted">
+          {figure.description}
         </p>
 
         {/* Estado */}
@@ -135,7 +127,7 @@ export function FigureSheet({
             <div className="mt-4 rounded-card bg-primary-soft p-5">
               <h2 className="flex items-center gap-2 text-[11px] font-extrabold tracking-widest text-primary uppercase">
                 <Sparkles className="size-4" aria-hidden />
-                Datos curiosos
+                ¿Sabías qué?
               </h2>
               <ul className="mt-3 space-y-2.5">
                 {figure.facts.map((fact) => (
@@ -152,9 +144,9 @@ export function FigureSheet({
                 <Lock className="size-5 text-muted" aria-hidden />
               </span>
               <p className="text-sm leading-snug font-bold text-muted">
-                Datos curiosos bloqueados.
+                ¿Sabías qué? — bloqueado.
                 <span className="block font-semibold text-muted/80">
-                  Consigue esta figura para descubrir sus secretos.
+                  Consigue esta figura para desbloquear sus 5 datos curiosos.
                 </span>
               </p>
             </div>
