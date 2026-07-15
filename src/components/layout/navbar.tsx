@@ -4,9 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Home, User } from "lucide-react";
 import { NotificationBell } from "@/components/notifications/notification-bell";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { PredictiveSearch } from "@/components/search/predictive-search";
-import { profile } from "@/lib/data/profile";
+import { useUserCollection } from "@/lib/store/user-collection";
 import { cn } from "@/lib/utils";
 
 /**
@@ -34,6 +33,7 @@ function Logo() {
 
 export function Navbar() {
   const pathname = usePathname();
+  const userName = useUserCollection((s) => s.userName);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border-soft bg-surface">
@@ -69,14 +69,13 @@ export function Navbar() {
         </div>
 
         <div className="ml-auto flex items-center gap-3 lg:ml-0">
-          <ThemeToggle />
           <NotificationBell />
 
           <button type="button" className="flex items-center gap-2.5" aria-label="Perfil">
             <span className="flex size-10 items-center justify-center rounded-full bg-linear-to-br from-amber-400 to-orange-600 text-lg">
               🧑‍🚀
             </span>
-            <span className="hidden text-sm font-extrabold lg:block">{profile.name}</span>
+            <span className="hidden text-sm font-extrabold lg:block">{userName}</span>
             <ChevronDown className="hidden size-4 text-muted lg:block" aria-hidden />
           </button>
         </div>

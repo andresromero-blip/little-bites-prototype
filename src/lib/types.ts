@@ -36,9 +36,16 @@ export interface Figure {
   series: string;
   rarity: Rarity;
   description: string;
+  /** Año de estreno de la serie del personaje */
+  seriesYear?: string;
+  /** Datos curiosos — se desbloquean al obtener la figura */
+  facts?: string[];
   /** Ruta a asset visual; null mientras no haya arte final */
   image: string | null;
 }
+
+/** Método de acceso del soft login (simulado en prototipo). */
+export type AuthMethod = "google" | "facebook" | "email" | "guest";
 
 export interface Collection {
   id: string;

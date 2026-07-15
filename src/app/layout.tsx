@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import { StoreHydrator } from "@/components/layout/store-hydrator";
 import { ThemeScript } from "@/components/layout/theme-script";
+import { WelcomeGate } from "@/components/auth/welcome-gate";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { BottomNav } from "@/components/layout/bottom-nav";
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body className="flex min-h-dvh flex-col antialiased">
         <ThemeScript />
         <StoreHydrator />
+        <WelcomeGate />
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />

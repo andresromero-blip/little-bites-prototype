@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, ChevronRight, Globe, Moon, SunMedium } from "lucide-react";
+import { Bell, ChevronRight, Globe, Mail, Moon, SunMedium } from "lucide-react";
 import { useTheme } from "@/lib/hooks/use-theme";
+import { useUserCollection } from "@/lib/store/user-collection";
+import type { AuthMethod } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 function Row({
@@ -28,27 +30,73 @@ function Row({
   );
 }
 
-/** Cuenta y preferencias (mock de prototipo, sin backend). */
+const METHOD_LABEL: Record<AuthMethod, string> = {
+  google: "Google",
+  facebook: "Facebook",
+  email: "Correo electrónico",
+  guest: "Invitado",
+};
+
+function MethodIcon({ method }: { method: AuthMethod }) {
+  if (method === "google") return <span className="text-sm font-black text-[#4285F4]">G</span>;
+  if (method === "facebook") return <span className="text-sm font-black text-[#1877F2]">f</span>;
+  return <Mail className="size-4 text-primary" aria-hidden />;
+}
+
+/** Cuenta y preferencias (soft login simulado, sin backend). */
 export function AccountSettings() {
   const [notifications, setNotifications] = useState(true);
   const { theme, toggle } = useTheme();
   const dark = theme === "dark";
+  const authMethod = useUserCollection((s) => s.authMethod);
+  const signIn = useUserCollection((s) => s.signIn);
 
   return (
     <div className="space-y-6">
       <section aria-label="Métodos de acceso">
         <h2 className="text-sm font-extrabold tracking-wide uppercase">Método de acceso</h2>
-        <div className="mt-3 rounded-card bg-surface py-1 shadow-sm">
-          <Row
-            icon={<span className="text-sm font-black text-[#4285F4]">G</span>}
-            label="Google"
-            value="Conectado"
-          >
-            <span className="rounded-full bg-success-soft px-2.5 py-1 text-[11px] font-extrabold text-success">
-              Conectado
-            </span>
-          </Row>
-        </div>
+
+        {authMethod && authMethod !== "guest" ? (
+          <div className="mt-3 rounded-card bg-surface py-1 shadow-sm">
+            <Row icon={<MethodIcon method={authMethod} />} label={METHOD_LABEL[authMethod]}>
+              <span className="rounded-full bg-success-soft px-2.5 py-1 text-[11px] font-extrabold text-success">
+                Conectado
+              </span>
+            </Row>
+          </div>
+        ) : (
+          /* Invitado: re-oferta del login con contexto (guest-first) */
+          <div className="mt-3 rounded-card bg-surface p-5 shadow-sm">
+            <p className="text-[15px] font-extrabold">Guarda tu progreso</p>
+            <p className="mt-1 text-[13px] font-semibold text-muted">
+              Estás como invitado: tu avance vive solo en este dispositivo. Conecta una
+              cuenta para no perderlo.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => signIn("google")}
+                className="flex items-center gap-2 rounded-xl border border-border-soft px-4 py-2.5 text-sm font-extrabold transition-colors hover:bg-background"
+              >
+                <span className="font-black text-[#4285F4]">G</span> Google
+              </button>
+              <button
+                type="button"
+                onClick={() => signIn("facebook")}
+                className="flex items-center gap-2 rounded-xl border border-border-soft px-4 py-2.5 text-sm font-extrabold transition-colors hover:bg-background"
+              >
+                <span className="font-black text-[#1877F2]">f</span> Facebook
+              </button>
+              <button
+                type="button"
+                onClick={() => signIn("email")}
+                className="flex items-center gap-2 rounded-xl border border-border-soft px-4 py-2.5 text-sm font-extrabold transition-colors hover:bg-background"
+              >
+                <Mail className="size-4 text-primary" aria-hidden /> Correo
+              </button>
+            </div>
+          </div>
+        )}
       </section>
 
       <section aria-label="Preferencias">

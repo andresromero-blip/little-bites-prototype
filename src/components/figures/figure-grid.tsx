@@ -5,6 +5,7 @@ import Link from "next/link";
 import { CheckCircle2, Lock } from "lucide-react";
 import { Tabs } from "@/components/ui/tabs";
 import { RarityChip } from "@/components/figures/rarity-chip";
+import { FigureSilhouette } from "@/components/figures/silhouette";
 import { getFigures } from "@/lib/data";
 import { useUserCollection } from "@/lib/store/user-collection";
 import type { Collection, Figure } from "@/lib/types";
@@ -24,7 +25,12 @@ function FigureCard({
   return (
     <Link
       href={`/colecciones/${collection.slug}/figuras/${figure.id}`}
-      className="relative flex flex-col items-center gap-2 rounded-card bg-surface p-4 pt-5 text-center shadow-sm transition-shadow hover:shadow-md"
+      className={cn(
+        "relative flex flex-col items-center gap-2 rounded-card p-4 pt-5 text-center transition-shadow",
+        owned
+          ? "bg-surface shadow-md hover:shadow-lg"
+          : "border border-line/70 bg-surface/50 hover:bg-surface"
+      )}
     >
       {owned && (
         <CheckCircle2
@@ -34,21 +40,34 @@ function FigureCard({
       )}
       <span
         className={cn(
-          "flex size-16 items-center justify-center rounded-full text-base font-black",
+          "flex size-16 items-center justify-center rounded-full",
           owned
-            ? "bg-primary-soft text-primary ring-2 ring-primary/30"
-            : "border-2 border-dashed border-line bg-background text-muted"
+            ? "bg-primary-soft text-base font-black text-primary ring-2 ring-primary/30"
+            : "bg-line/60 text-muted/70"
         )}
       >
-        {String(figure.number).padStart(2, "0")}
+        {owned ? (
+          String(figure.number).padStart(2, "0")
+        ) : (
+          <FigureSilhouette className="h-10 w-auto" />
+        )}
       </span>
       <span
         className={cn("text-[13px] leading-tight font-extrabold", !owned && "text-muted")}
       >
         {figure.name}
       </span>
-      <span className="line-clamp-1 text-[11px] font-semibold text-muted">{figure.series}</span>
-      <RarityChip rarity={figure.rarity} />
+      <span
+        className={cn(
+          "line-clamp-1 text-[11px] font-semibold text-muted",
+          !owned && "opacity-70"
+        )}
+      >
+        {figure.series}
+      </span>
+      <span className={cn(!owned && "opacity-60")}>
+        <RarityChip rarity={figure.rarity} />
+      </span>
     </Link>
   );
 }
