@@ -2,21 +2,45 @@
 
 import { useState } from "react";
 import { Mail } from "lucide-react";
+import { GoogleScreen } from "@/components/auth/screens/google-screen";
+import { FacebookScreen } from "@/components/auth/screens/facebook-screen";
+import { EmailScreen } from "@/components/auth/screens/email-screen";
 import { useUserCollection } from "@/lib/store/user-collection";
 
+type Screen = "google" | "facebook" | "email";
+
 /**
- * Bienvenida guest-first (primera visita).
- * Soft login simulado: Google / Facebook / correo, o continuar como invitado.
- * Nunca es un muro: el valor del producto se prueba antes de pedir compromiso.
+ * Soft login guest-first.
+ * Primera visita: bienvenida → pantalla del proveedor (simulada 1:1) → dentro.
+ * Re-oferta (Perfil): abre directamente la pantalla del proveedor elegido.
  */
 export function WelcomeGate() {
   const hasHydrated = useUserCollection((s) => s.hasHydrated);
   const authMethod = useUserCollection((s) => s.authMethod);
+  const authScreen = useUserCollection((s) => s.authScreen);
   const signIn = useUserCollection((s) => s.signIn);
-  const [emailMode, setEmailMode] = useState(false);
-  const [email, setEmail] = useState("");
+  const openAuthScreen = useUserCollection((s) => s.openAuthScreen);
+  const [step, setStep] = useState<"welcome" | Screen>("welcome");
 
-  if (!hasHydrated || authMethod !== null) return null;
+  if (!hasHydrated) return null;
+
+  const isFirstVisit = authMethod === null;
+  const screen: Screen | null = isFirstVisit
+    ? step === "welcome"
+      ? null
+      : step
+    : authScreen;
+
+  if (!isFirstVisit && !screen) return null;
+
+  const back = () => (isFirstVisit ? setStep("welcome") : openAuthScreen(null));
+
+  if (screen === "google")
+    return <GoogleScreen onBack={back} onDone={() => signIn("google")} />;
+  if (screen === "facebook")
+    return <FacebookScreen onBack={back} onDone={() => signIn("facebook")} />;
+  if (screen === "email")
+    return <EmailScreen onBack={back} onDone={(nombre) => signIn("email", nombre)} />;
 
   return (
     <div className="hero-rays fixed inset-0 z-50 overflow-y-auto text-white">
@@ -42,7 +66,7 @@ export function WelcomeGate() {
         <div className="mt-8 space-y-3">
           <button
             type="button"
-            onClick={() => signIn("google")}
+            onClick={() => setStep("google")}
             className="flex w-full items-center justify-center gap-3 rounded-xl bg-white px-5 py-3.5 text-[15px] font-extrabold text-[#17123a] transition-transform hover:scale-[1.01]"
           >
             <span className="text-base font-black text-[#4285F4]">G</span>
@@ -50,48 +74,20 @@ export function WelcomeGate() {
           </button>
           <button
             type="button"
-            onClick={() => signIn("facebook")}
+            onClick={() => setStep("facebook")}
             className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#1877F2] px-5 py-3.5 text-[15px] font-extrabold text-white transition-transform hover:scale-[1.01]"
           >
             <span className="text-base font-black">f</span>
             Continuar con Facebook
           </button>
-
-          {emailMode ? (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (email.trim()) signIn("email");
-              }}
-              className="flex gap-2"
-            >
-              <input
-                type="email"
-                required
-                autoFocus
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="tu@correo.com"
-                aria-label="Correo electrónico"
-                className="min-w-0 flex-1 rounded-xl bg-white/15 px-4 py-3.5 text-[15px] font-semibold text-white outline-none backdrop-blur-sm placeholder:text-white/50 focus:bg-white/25"
-              />
-              <button
-                type="submit"
-                className="shrink-0 rounded-xl bg-white/20 px-4 py-3.5 text-[15px] font-extrabold transition-colors hover:bg-white/30"
-              >
-                Enviar enlace
-              </button>
-            </form>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setEmailMode(true)}
-              className="flex w-full items-center justify-center gap-3 rounded-xl bg-white/15 px-5 py-3.5 text-[15px] font-extrabold backdrop-blur-sm transition-colors hover:bg-white/25"
-            >
-              <Mail className="size-4" aria-hidden />
-              Continuar con correo
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => setStep("email")}
+            className="flex w-full items-center justify-center gap-3 rounded-xl bg-white/15 px-5 py-3.5 text-[15px] font-extrabold backdrop-blur-sm transition-colors hover:bg-white/25"
+          >
+            <Mail className="size-4" aria-hidden />
+            Continuar con correo
+          </button>
         </div>
 
         <button

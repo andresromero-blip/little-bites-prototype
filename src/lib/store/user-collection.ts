@@ -25,6 +25,8 @@ interface UserCollectionStore {
   /** Soft login simulado; null = aún no elige (muestra bienvenida). */
   authMethod: AuthMethod | null;
   userName: string;
+  /** Pantalla de proveedor abierta desde la re-oferta (no se persiste). */
+  authScreen: Exclude<AuthMethod, "guest"> | null;
   /** true cuando el estado real ya se leyó de localStorage (no se persiste). */
   hasHydrated: boolean;
   addFigure: (collectionId: string, figureId: string) => void;
@@ -32,7 +34,8 @@ interface UserCollectionStore {
   hasFigure: (collectionId: string, figureId: string) => boolean;
   markNotificationRead: (id: string) => void;
   markAllNotificationsRead: (ids: string[]) => void;
-  signIn: (method: AuthMethod) => void;
+  signIn: (method: AuthMethod, name?: string) => void;
+  openAuthScreen: (method: Exclude<AuthMethod, "guest"> | null) => void;
   /** Restaura el estado demo (18/25 en Cartoon Network). */
   resetDemo: () => void;
 }
@@ -44,6 +47,7 @@ export const useUserCollection = create<UserCollectionStore>()(
       readNotificationIds: [],
       authMethod: null,
       userName: "Coleccionista",
+      authScreen: null,
       hasHydrated: false,
 
       addFigure: (collectionId, figureId) =>
@@ -76,7 +80,14 @@ export const useUserCollection = create<UserCollectionStore>()(
 
       markAllNotificationsRead: (ids) => set({ readNotificationIds: ids }),
 
-      signIn: (method) => set({ authMethod: method, userName: METHOD_NAME[method] }),
+      signIn: (method, name) =>
+        set({
+          authMethod: method,
+          userName: name?.trim() ? name.trim() : METHOD_NAME[method],
+          authScreen: null,
+        }),
+
+      openAuthScreen: (method) => set({ authScreen: method }),
 
       resetDemo: () =>
         set({

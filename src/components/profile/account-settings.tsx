@@ -49,7 +49,7 @@ export function AccountSettings() {
   const { theme, toggle } = useTheme();
   const dark = theme === "dark";
   const authMethod = useUserCollection((s) => s.authMethod);
-  const signIn = useUserCollection((s) => s.signIn);
+  const openAuthScreen = useUserCollection((s) => s.openAuthScreen);
 
   return (
     <div className="space-y-6">
@@ -75,21 +75,21 @@ export function AccountSettings() {
             <div className="mt-4 flex flex-wrap gap-2">
               <button
                 type="button"
-                onClick={() => signIn("google")}
+                onClick={() => openAuthScreen("google")}
                 className="flex items-center gap-2 rounded-xl border border-border-soft px-4 py-2.5 text-sm font-extrabold transition-colors hover:bg-background"
               >
                 <span className="font-black text-[#4285F4]">G</span> Google
               </button>
               <button
                 type="button"
-                onClick={() => signIn("facebook")}
+                onClick={() => openAuthScreen("facebook")}
                 className="flex items-center gap-2 rounded-xl border border-border-soft px-4 py-2.5 text-sm font-extrabold transition-colors hover:bg-background"
               >
                 <span className="font-black text-[#1877F2]">f</span> Facebook
               </button>
               <button
                 type="button"
-                onClick={() => signIn("email")}
+                onClick={() => openAuthScreen("email")}
                 className="flex items-center gap-2 rounded-xl border border-border-soft px-4 py-2.5 text-sm font-extrabold transition-colors hover:bg-background"
               >
                 <Mail className="size-4 text-primary" aria-hidden /> Correo
