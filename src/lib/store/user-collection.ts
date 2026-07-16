@@ -100,11 +100,19 @@ export const useUserCollection = create<UserCollectionStore>()(
     {
       name: "lb-user-collection-v1",
       skipHydration: true,
+      /**
+       * DEMO: la sesión (authMethod/userName) NO se persiste — cada carga
+       * del sitio arranca en la pantalla de métodos de acceso, para poder
+       * demostrar el flujo completo siempre. El progreso sí se conserva.
+       */
+      version: 2,
+      migrate: (persisted) => {
+        const s = persisted as Partial<UserCollectionStore>;
+        return { owned: s.owned ?? {}, readNotificationIds: s.readNotificationIds ?? [] };
+      },
       partialize: (s) => ({
         owned: s.owned,
         readNotificationIds: s.readNotificationIds,
-        authMethod: s.authMethod,
-        userName: s.userName,
       }),
     }
   )

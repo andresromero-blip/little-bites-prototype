@@ -11,7 +11,8 @@ type Screen = "google" | "facebook" | "email";
 
 /**
  * Soft login guest-first.
- * Primera visita: bienvenida → pantalla del proveedor (simulada 1:1) → dentro.
+ * DEMO: la sesión no se persiste, así que esta bienvenida aparece en CADA
+ * visita → bienvenida → pantalla del proveedor (simulada 1:1) → dentro.
  * Re-oferta (Perfil): abre directamente la pantalla del proveedor elegido.
  */
 export function WelcomeGate() {
