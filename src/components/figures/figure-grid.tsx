@@ -26,7 +26,7 @@ function FigureCard({
     <Link
       href={`/colecciones/${collection.slug}/figuras/${figure.id}`}
       className={cn(
-        "relative flex flex-col items-center gap-2 rounded-card p-4 pt-5 text-center transition-shadow",
+        "relative flex flex-col items-center gap-1.5 rounded-card p-2.5 pt-4 text-center transition-shadow sm:gap-2 sm:p-4 sm:pt-5",
         owned
           ? "bg-surface shadow-md hover:shadow-lg"
           : "border border-line/70 bg-surface/50 hover:bg-surface"
@@ -34,32 +34,36 @@ function FigureCard({
     >
       {owned && (
         <CheckCircle2
-          className="absolute top-2.5 right-2.5 size-4 text-success"
+          className="absolute top-2 right-2 size-3.5 text-success sm:top-2.5 sm:right-2.5 sm:size-4"
           aria-label="Obtenida"
         />
       )}
       <span
         className={cn(
-          "flex size-16 items-center justify-center rounded-full",
+          "flex size-12 items-center justify-center rounded-full sm:size-16",
           owned
-            ? "bg-primary-soft text-base font-black text-primary ring-2 ring-primary/30"
+            ? "bg-primary-soft text-sm font-black text-primary ring-2 ring-primary/30 sm:text-base"
             : "bg-line/60 text-muted/70"
         )}
       >
         {owned ? (
           String(figure.number).padStart(2, "0")
         ) : (
-          <FigureSilhouette className="h-10 w-auto" />
+          <FigureSilhouette className="h-8 w-auto sm:h-10" />
         )}
       </span>
       <span
-        className={cn("text-[13px] leading-tight font-extrabold", !owned && "text-muted")}
+        className={cn(
+          "line-clamp-2 text-[12px] leading-tight font-extrabold sm:text-[13px]",
+          !owned && "text-muted"
+        )}
       >
         {figure.name}
       </span>
+      {/* La serie es dato secundario: vive en la ficha; en mobile se omite */}
       <span
         className={cn(
-          "line-clamp-1 text-[11px] font-semibold text-muted",
+          "hidden line-clamp-1 text-[11px] font-semibold text-muted sm:block",
           !owned && "opacity-70"
         )}
       >
@@ -110,7 +114,9 @@ export function FigureGrid({
 
   return (
     <section aria-label="Figuras" className="mt-10">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      {/* Tabs sticky en mobile: el filtro acompaña el scroll y permite
+          saltar a "Faltantes" desde cualquier punto de la lista */}
+      <div className="sticky top-16 z-30 -mx-4 flex flex-col gap-3 bg-background px-4 py-3 sm:flex-row sm:items-center sm:justify-between lg:static lg:mx-0 lg:bg-transparent lg:p-0">
         <h2 className="text-sm font-extrabold tracking-wide uppercase">Figuras</h2>
         <Tabs
           items={[
@@ -131,7 +137,7 @@ export function FigureGrid({
             : "Aún no has registrado figuras de esta colección."}
         </p>
       ) : (
-        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="mt-4 grid grid-cols-3 gap-2 sm:mt-5 sm:gap-3 md:grid-cols-4 lg:grid-cols-5">
           {visible.map((f) => (
             <FigureCard
               key={f.id}
