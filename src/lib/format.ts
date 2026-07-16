@@ -5,3 +5,9 @@ export function launchLabel(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
   return `${d} ${MONTHS[(m ?? 1) - 1]} ${y}`;
 }
+
+/** "2026-06-15" → "jun 2026" */
+export function monthYearLabel(iso: string): string {
+  const [y, m] = iso.split("-").map(Number);
+  return `${MONTHS[(m ?? 1) - 1]} ${y}`;
+}
